@@ -3,10 +3,14 @@ from PIL import Image
 from time import localtime, strftime
 app = Flask(__name__)
 
-@app.route("/api/send-image", methods=["POST"])
+@app.route("/api/get-building", methods=["POST"])
 def process_image():
     file = request.files['image']
-    xCoord, yCoord = request.form['x-coord'], request.form['y-coord']
+    bearing, lat, long = request.form['bearing'], request.form['lat'], request.form['long']
+    print("Bearing", bearing)
+    print("Latitude", lat)
+    print("Long", long)
+
     img = Image.open(file.stream)
     file.save("received-img.jpg")
 
