@@ -1,20 +1,19 @@
 from flask import Flask, request, jsonify
 from PIL import Image
 from time import localtime, strftime
+from Prediction import predict
 app = Flask(__name__)
 
 @app.route("/api/get-building", methods=["POST"])
 def process_image():
     file = request.files['image']
     bearing, lat, long = float(request.form['bearing']), float(request.form['lat']), float(request.form['long'])
-    print("Bearing", bearing)
-    print("Latitude", lat)
-    print("Long", long)
 
-    img = Image.open(file.stream)
+    # img = Image.open(file.stream)
     file.save("received-img.jpg")
 
-    return jsonify({'msg': 'success', 'size': [img.width, img.height]})
+    buildings = predict(lat, long, bearing, "received-img.jpg")
+    return jsonify({'msg': 'success', 'buildings': buildings})
 
 @app.route("/api/ping", methods=["GET"])
 def ping():
