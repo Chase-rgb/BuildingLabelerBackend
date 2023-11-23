@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/api/get-building", methods=["POST"])
 def process_image():
     file = request.files['image']
-    bearing, lat, long = request.form['bearing'], request.form['lat'], request.form['long']
+    bearing, lat, long = float(request.form['bearing']), float(request.form['lat']), float(request.form['long'])
     print("Bearing", bearing)
     print("Latitude", lat)
     print("Long", long)
