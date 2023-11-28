@@ -2,9 +2,9 @@ import numpy as np
 import pickle
 
 # Search Radius (m)
-SEARCH_RADIUS = 130
+SEARCH_RADIUS = 200
 # Field of View (degrees)
-FOV = 120
+FOV = 135
 
 def haversine(lon1, lat1, lon2, lat2):
   """
